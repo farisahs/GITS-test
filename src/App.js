@@ -38,6 +38,11 @@ class App extends React.Component {
 
   handleSubmitSocks = evt => {
     const { socks } = this.state;
+    var newSocks = [];
+    for (var k = 0; k < socks.length; k++) {
+      newSocks.push(socks[k].color);
+    }
+    console.log(newSocks);
     var pairs = 0;
     for (var i = 0; i < socks.length; i++) {
       for (var j = i+1; j < socks.length; j++) {
@@ -47,7 +52,8 @@ class App extends React.Component {
               break;
           }
       }
-  }
+    }
+    console.log(pairs, "pasang kaos kaki");
     this.setState({ pair: pairs });
     this.setState({ socks: [{ color: 0 }] });
   };
@@ -58,10 +64,9 @@ class App extends React.Component {
     for (var i = 0; i < toy.length; i++) {
       newToy.push(toy[i].price);
     }
-    newToy.sort(function(a, b){return a - b});
-    // var hasil = hitung(newToy);
     console.log(newToy);
     console.log(money);
+    newToy.sort(function(a, b){return a - b});
     function hitung(newToy) {
       var jumlah = 0;
       var hasil = parseInt(newToy[0]);
@@ -69,8 +74,6 @@ class App extends React.Component {
           for (var k = j+1; k < newToy.length; k++) {
               hasil = hasil + parseInt(newToy[k]);
               jumlah = jumlah + 1;
-              console.log(newToy[k]);
-              console.log(hasil);
               if (hasil > money) {
                   return jumlah
               }
@@ -78,7 +81,7 @@ class App extends React.Component {
       }
     }
     var jumlah = hitung(newToy);
-    console.log(jumlah);
+    console.log("jumlah mainan yang dapat dibeli",jumlah);
 
     this.setState({ totalToy: jumlah });
   };
